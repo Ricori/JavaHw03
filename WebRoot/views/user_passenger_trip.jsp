@@ -21,11 +21,41 @@
 		</div>
 	</header>
 
-
-TRIPINFO VIEW
-
+	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" style="border-color:#f37a4c;">
+		<h2 class="am-titlebar-title tripingtitle">进行中的行程</h2>
+	</div>
+	<div class="tripinglists">
+		<div class="am-panel am-panel-warning">
+			<div class="am-panel-hd">面板标题</div>
+			<div class="am-panel-bd">面板内容</div>
+		</div>		
+	</div>
 	
-  <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
+	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" style="border-color:#5db95d;">
+		<h2 class="am-titlebar-title publishtriptitle">发布中的行程</h2>
+	</div>
+	<div class="publishtriplists">
+		<div class="am-panel am-panel-success">
+			<div class="am-panel-hd">面板标题</div>
+			<div class="am-panel-bd">面板内容</div>
+		</div>	
+	</div>
+	
+	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+		<h2 class="am-titlebar-title">已结束的行程</h2>
+	</div>
+	<div class="endtriplists">
+		<div class="am-panel am-panel-secondary">
+			<div class="am-panel-hd">面板标题</div>
+			<div class="am-panel-bd">面板内容</div>
+		</div>
+		<div class="am-panel am-panel-secondary">
+			<div class="am-panel-hd">面板标题</div>
+			<div class="am-panel-bd">面板内容</div>
+		</div>		
+	</div>
+	
+	<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
       <ul class="am-navbar-nav am-cf am-avg-sm-4">
           <li><a href="user_passenger" class="">
                 <span class="am-icon-taxi"></span>

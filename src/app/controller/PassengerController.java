@@ -24,6 +24,9 @@ public class PassengerController {
 	
 	@RequestMapping(value = "/user_passenger_tripinfo")
 	public String userPassengerTrip(HttpServletRequest request,Model model){
+		
+		
+		
 		return "user_passenger_trip";
 	}
 	
@@ -53,7 +56,7 @@ public class PassengerController {
 		String price = request.getParameter("price");
 		
 		if(splace == null || eplace == null || stimed == null || 
-			stimehm == null || people == null ||price == null){
+			stimehm == null || people == null || price == null){
 			model.addAttribute("success",0);
 			return "user_publishok";
 		}

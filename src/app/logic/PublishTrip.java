@@ -10,9 +10,12 @@ public class PublishTrip {
 	public TripInfoDAO dao = new TripInfoDAO();
 	
 	/**查询用户行程列表
-	 * @param Userid 用户ID
+	 * @param userid 用户ID
 	 */
-	
+	public void serachPublishTrip(Integer userid){
+		
+		
+	}
 	
 
 	/**添加行程

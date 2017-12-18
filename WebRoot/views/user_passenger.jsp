@@ -22,11 +22,11 @@
 	</header>
 
 
-	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default"">
 		<h2 class="am-titlebar-title ">填写行程信息</h2>
 	</div>
 	
-	<div class="am-panel am-panel-default" id="infopanel">
+	<div class="am-panel am-panel-default addtrippanel">
 	<div class="am-panel-bd">
       <form action="publishTrip" method="post" class="am-form" style="padding: 5px;">
       <label>出发地点</label>

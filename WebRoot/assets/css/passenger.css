@@ -1,3 +1,19 @@
-#infopanel{
+.addtrippanel,.tripinglists,.publishtriplists,.endtriplists{
 	margin:16px;
+}
+
+.tripingtitle{
+	color: #f47a1f !important;
+}
+
+.tripingtitle:before{
+	border-left: 3px solid #f47a1f !important;
+}
+
+.publishtriptitle{
+	color: #5db95d !important;
+}
+
+.publishtriptitle:before{
+	border-left: 3px solid #5db95d !important;
 }
