@@ -3,6 +3,7 @@ package app.controller;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.entity.TripInfo;
+import app.entity.TripOrderInfo;
+import app.logic.OrderTrip;
 import app.logic.PublishTrip;
 
 @Controller
@@ -24,8 +27,23 @@ public class PassengerController {
 	
 	@RequestMapping(value = "/user_passenger_tripinfo")
 	public String userPassengerTrip(HttpServletRequest request,Model model){
+		HttpSession seesion = request.getSession();
+		Integer userid = (Integer) seesion.getAttribute("userid");
+		//进行中行程
+		OrderTrip o = new OrderTrip();
+		ArrayList<TripOrderInfo> tripingOrders = o.searchTripingOrder(userid);
+		model.addAttribute("tripingOrders",tripingOrders);
+		
+		//发布中行程
+		PublishTrip p = new PublishTrip(); 
+		ArrayList<TripInfo> allPublishTrips = p.serachPublishTrip(userid);
+		model.addAttribute("allPublishTrips",allPublishTrips);
 		
 		
+		
+		//已完成行程
+		ArrayList<TripOrderInfo> endTripOrders = o.serachEndTripOrder(userid,1);
+		model.addAttribute("endTripOrders",endTripOrders);
 		
 		return "user_passenger_trip";
 	}

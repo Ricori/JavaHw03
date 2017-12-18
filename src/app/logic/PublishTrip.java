@@ -17,7 +17,7 @@ public class PublishTrip {
 	public ArrayList<TripInfo> serachPublishTrip(Integer userid){
 		ArrayList<TripInfo> allTripInfos = new ArrayList<TripInfo>();
 		String sqlTxt = "select * from trip_publish_info where passenger=" + userid;
-		sqlTxt += " and order=0";  //没有司机接单
+		sqlTxt += " and `order`=0";  //没有司机接单
 		System.out.println("sql-->" + sqlTxt);
 		List<Object> result = dao.queryAll(sqlTxt);
 		for(int i = 0;i < result.size();i++){
@@ -28,7 +28,7 @@ public class PublishTrip {
 	
 
 	/**添加行程
-	 * @param TripInfo 行程对象
+	 * @param tripInfo 行程对象
 	 */
 	public boolean addPublishTrip(TripInfo tripInfo) throws SQLException {
 		

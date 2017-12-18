@@ -21,6 +21,7 @@
 		</div>
 	</header>
 
+	<c:if test="${tripingOrders.size() != 0}">
 	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" style="border-color:#f37a4c;">
 		<h2 class="am-titlebar-title tripingtitle">进行中的行程</h2>
 	</div>
@@ -30,17 +31,38 @@
 			<div class="am-panel-bd">面板内容</div>
 		</div>		
 	</div>
+	</c:if>
 	
+	<c:if test="${allPublishTrips.size() != 0}">
 	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default" style="border-color:#5db95d;">
 		<h2 class="am-titlebar-title publishtriptitle">发布中的行程</h2>
 	</div>
 	<div class="publishtriplists">
-		<div class="am-panel am-panel-success">
-			<div class="am-panel-hd">面板标题</div>
-			<div class="am-panel-bd">面板内容</div>
-		</div>	
+		<c:forEach items="${allPublishTrips}" var="publishTrip">
+			<div class="am-panel am-panel-success">
+				<div class="am-panel-hd">订单编号:${publishTrip.getId()} 
+				<c:if test="${publishTrip.getOrder() == 0}">(等待司机接单)</c:if>
+				<c:if test="${publishTrip.getOrder() == 1}"><b>(司机已接单)</b></c:if>
+				</div>
+				<div class="am-panel-bd">
+				<ul>
+				<li>
+				<c:if test="${publishTrip.getOrder() == 0}">状态：等待司机接单...</c:if>
+				<c:if test="${publishTrip.getOrder() == 1}">状态：司机已接单,请尽快到达约定地点上车</c:if>
+				</li>
+			    <li>出发地点：${publishTrip.getStartplace()}</li>
+			    <li>目的地点：${publishTrip.getEndplace()}</li>
+			    <li>出发时间：${publishTrip.getStarttime()}</li>
+			    <li>行程人数：${publishTrip.getPeoplenum()}</li>
+			    <li>期望价格：${publishTrip.getPrice()}</li>
+			  	</ul>
+				</div>
+			</div>	
+		</c:forEach>
 	</div>
+	</c:if>
 	
+	<c:if test="${endTripOrders.size() != 0}">
 	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
 		<h2 class="am-titlebar-title">已结束的行程</h2>
 	</div>
@@ -54,6 +76,7 @@
 			<div class="am-panel-bd">面板内容</div>
 		</div>		
 	</div>
+	</c:if>
 	
 	<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
       <ul class="am-navbar-nav am-cf am-avg-sm-4">
