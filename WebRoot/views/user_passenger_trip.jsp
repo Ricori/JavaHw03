@@ -29,22 +29,29 @@
 		<c:forEach items="${tripingOrders}" var="tripingOrder">
 			<div class="am-panel am-panel-warning">
 				<div class="am-panel-hd">订单编号:${tripingOrder.getId()} 
-				<c:if test="${tripingOrder.getPstartstate() == 0}">(等待司机到达)</c:if>
-				<c:if test="${tripingOrder.getPstartstate() == 1 && tripingOrder.getPendstate() == 0}">
+				<c:if test="${tripingOrder.getDstartstate() == 0}">(等待司机到达)</c:if>
+				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 0}">
 					<b>(司机已经到达约定地点，请尽快确认出发)</b>
 				</c:if>
-				<c:if test="${tripingOrder.getPendstate() == 1}"><b>(司机已经到达目的地，请尽快确认到达)</b></c:if>
+				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 1}">
+					<b>(行程中...)</b>
+				</c:if>
+				<c:if test="${tripingOrder.getDendstate() == 1}"><b>(司机已经到达目的地，请尽快确认到达)</b></c:if>
 				</div>
 				<div class="am-panel-bd">
 				<ul>
 				<li>
 				<c:if test="${tripingOrder.getPstartstate() == 0}">订单状态：等待司机到达</c:if>
-				<c:if test="${tripingOrder.getPstartstate() == 1 && tripingOrder.getPendstate() == 0}">
-					<b>订单状态：司机已经到达约定地点，请尽快确认出发</b>
+				<c:if test="${tripingOrder.getPstartstate() == 1 && tripingOrder.getPstartstate() == 0}">
+					订单状态：司机已经到约定地点
 				</c:if>
-				<c:if test="${tripingOrder.getPendstate() == 1}"><b>订单状态：司机已经到达目的地，请尽快确认到达</b></c:if>
+				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 1}">
+					<b>订单状态：行程中</b>
+				</c:if>
+				<c:if test="${tripingOrder.getDendstate() == 1}"><b>订单状态：司机已经到达目的地，请尽快确认到达</b></c:if>
 				</li>
 			    <li>接单司机id：${tripingOrder.getDriver()}</li>
+			    <li>接单司机手机号：${tripingOrder.getDriverphone()}</li>
 			    <li>出发地点：${tripingOrder.getStartplace()}</li>
 			    <li>目的地点：${tripingOrder.getEndplace()}</li>
 			    <li>行程人数：${tripingOrder.getPeoplenum()}</li>
