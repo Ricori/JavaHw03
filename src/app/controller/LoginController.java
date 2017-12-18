@@ -23,7 +23,7 @@ public class LoginController {
 	}
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request,Model model){
-		return "user_login";
+		return "user_login"; //12354665
 	}
 	
 	@RequestMapping(value = "/userLoginCheck")
