@@ -27,6 +27,22 @@ public class PublishTrip {
 	}
 	
 
+	/**查询没有被接单的用户行程
+	 * @param fy 第几页
+	 */
+	public ArrayList<TripInfo> serachNyacTripOrder(Integer fy){
+		String sqlTxt = "select * from trip_publish_info where `order`= 0";
+		sqlTxt += " limit " + (fy-1)*5 +","+ 5;
+		ArrayList<TripInfo> allTripOrders = new ArrayList<TripInfo>();
+		System.out.println("sql-->" + sqlTxt);
+		List<Object> result = dao.queryAll(sqlTxt);
+		for(int i = 0;i < result.size();i++){
+			allTripOrders.add((TripInfo)result.get(i));
+		}
+		return allTripOrders;
+	}
+	
+	
 	/**添加行程
 	 * @param tripInfo 行程对象
 	 */
