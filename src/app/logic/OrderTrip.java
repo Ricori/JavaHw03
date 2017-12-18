@@ -7,3 +7,4 @@ import app.entity.TripOrderInfo;
 public class OrderTrip {
 	public TripOrderInfoDAO dao = new TripOrderInfoDAO();
 }
+
