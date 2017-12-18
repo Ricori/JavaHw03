@@ -11,10 +11,10 @@ public class TripOrderInfo {
 	private String endplace;	//目的地点
 	private Integer peoplenum;	//人数
 	private Double price;		//多少钱
-	private Integer pstartstate;//司机是否到达出发地(0表示未到达,1表示到达)
-	private Integer dstartstate;//乘客是否确认出发(0表示未确认，1表示确认)
-	private Integer pendstate;	//司机是否确认到达目的地(司机确认到达后将生成支付订单，并发送给乘客)
-	private Integer dendstate;	//乘客是否确认到达目的地(0表示未确认，1表示确认)
+	private Integer pstartstate;//乘客是否到达出发地(0表示未到达,1表示到达)
+	private Integer dstartstate;//司机是否确认出发(0表示未确认，1表示确认)
+	private Integer pendstate;	//乘客是否确认到达目的地(司机确认到达后将生成支付订单，并发送给乘客)
+	private Integer dendstate;	//司机是否确认到达目的地(0表示未确认，1表示确认)
 	private Integer payid;		//对应支付订单id
 
 	public TripOrderInfo() {}
