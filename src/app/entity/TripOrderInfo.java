@@ -5,6 +5,8 @@ public class TripOrderInfo {
 	private Integer id;			//行程订单id
 	private Integer passenger;	//乘客id编号
 	private Integer driver;		//司机id编号
+	private Integer passengerphone;	//乘客手机号
+	private Integer driverphone;	//司机手机号
 	private String startplace;	//出发地点
 	private String endplace;	//目的地点
 	private Integer peoplenum;	//人数
@@ -17,12 +19,14 @@ public class TripOrderInfo {
 
 	public TripOrderInfo() {}
 
-	public TripOrderInfo(Integer id, Integer passenger, Integer driver, String startplace, String endplace,
-			Integer peoplenum, Double price, Integer pstartstate, Integer dstartstate, Integer pendstate,
-			Integer dendstate, Integer payid) {
+	public TripOrderInfo(Integer id, Integer passenger, Integer driver, Integer passengerphone,
+			Integer driverphone,String startplace, String endplace,Integer peoplenum, Double price, 
+			Integer pstartstate, Integer dstartstate, Integer pendstate,Integer dendstate, Integer payid) {
 		this.id = id;
 		this.passenger = passenger;
 		this.driver = driver;
+		this.passengerphone = passengerphone;
+		this.driverphone = driverphone;
 		this.startplace = startplace;
 		this.endplace = endplace;
 		this.peoplenum = peoplenum;
@@ -58,6 +62,22 @@ public class TripOrderInfo {
 		this.driver = driver;
 	}
 	
+	public Integer getPassengerphone() {
+		return passengerphone;
+	}
+
+	public void setPassengerphone(Integer passengerphone) {
+		this.passengerphone = passengerphone;
+	}
+
+	public Integer getDriverphone() {
+		return driverphone;
+	}
+
+	public void setDriverphone(Integer driverphone) {
+		this.driverphone = driverphone;
+	}
+
 	public String getStartplace() {
 		return startplace;
 	}

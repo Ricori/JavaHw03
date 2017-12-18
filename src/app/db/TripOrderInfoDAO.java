@@ -11,6 +11,8 @@ public class TripOrderInfoDAO extends DBHelperDAO{
 				rs.getInt("id"),
 				rs.getInt("passenger"),
 				rs.getInt("driver"),
+				rs.getInt("passengerphone"),
+				rs.getInt("driverphone"),
 				rs.getString("startplace"),
 				rs.getString("endplace"),
 				rs.getInt("peoplenum"),
