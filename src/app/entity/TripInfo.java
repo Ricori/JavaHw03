@@ -6,7 +6,7 @@ public class TripInfo {
 
 	private Integer id;			//发布信息id编号
 	private Integer passenger;	//乘客id编号
-	private Integer order;		//是否有司机接单
+	private Integer order;		//是否有司机接单,0表示没有,1表示有
 	private Integer driver;		//接单司机id编号
 	private Timestamp starttime;//出发时间
 	private String startplace;	//出发地点

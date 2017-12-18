@@ -1,6 +1,8 @@
 package app.logic;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import app.db.TripInfoDAO;
 import app.entity.TripInfo;
@@ -9,12 +11,19 @@ public class PublishTrip {
 
 	public TripInfoDAO dao = new TripInfoDAO();
 	
-	/**查询用户行程列表
+	/**查询用户发布中的行程列表
 	 * @param userid 用户ID
 	 */
-	public void serachPublishTrip(Integer userid){
-		
-		
+	public ArrayList<TripInfo> serachPublishTrip(Integer userid){
+		ArrayList<TripInfo> allTripInfos = new ArrayList<TripInfo>();
+		String sqlTxt = "select * from trip_publish_info where passenger=" + userid;
+		sqlTxt += " and order=0";  //没有司机接单
+		System.out.println("sql-->" + sqlTxt);
+		List<Object> result = dao.queryAll(sqlTxt);
+		for(int i = 0;i < result.size();i++){
+			allTripInfos.add((TripInfo)result.get(i));
+		}
+		return allTripInfos;
 	}
 	
 
