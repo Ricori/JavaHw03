@@ -26,10 +26,27 @@
 		<h2 class="am-titlebar-title tripingtitle">进行中的行程</h2>
 	</div>
 	<div class="tripinglists">
-		<div class="am-panel am-panel-warning">
-			<div class="am-panel-hd">面板标题</div>
-			<div class="am-panel-bd">面板内容</div>
-		</div>		
+		<c:forEach items="${tripingOrders}" var="tripingOrder">
+			<div class="am-panel am-panel-success">
+				<div class="am-panel-hd">订单编号:${tripingOrder.getId()} 
+				<c:if test="${tripingOrder.getPstartstate() == 0}">(等待司机到达)</c:if>
+				<c:if test="${tripingOrder.getPstartstate() == 1}"><b>(司机已经到达，请尽快确认出发)</b></c:if>
+				</div>
+				<div class="am-panel-bd">
+				<ul>
+				<li>
+				<c:if test="${publishTrip.getOrder() == 0}">状态：等待司机接单...</c:if>
+				<c:if test="${publishTrip.getOrder() == 1}">状态：司机已接单,请尽快到达约定地点上车</c:if>
+				</li>
+			    <li>出发地点：${publishTrip.getStartplace()}</li>
+			    <li>目的地点：${publishTrip.getEndplace()}</li>
+			    <li>出发时间：${publishTrip.getStarttime()}</li>
+			    <li>行程人数：${publishTrip.getPeoplenum()}</li>
+			    <li>期望价格：${publishTrip.getPrice()}</li>
+			  	</ul>
+				</div>
+			</div>	
+		</c:forEach>	
 	</div>
 	</c:if>
 	

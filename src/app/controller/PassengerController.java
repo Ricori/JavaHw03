@@ -38,8 +38,7 @@ public class PassengerController {
 		PublishTrip p = new PublishTrip(); 
 		ArrayList<TripInfo> allPublishTrips = p.serachPublishTrip(userid);
 		model.addAttribute("allPublishTrips",allPublishTrips);
-		
-		
+	
 		
 		//已完成行程
 		ArrayList<TripOrderInfo> endTripOrders = o.serachEndTripOrder(userid,1);
