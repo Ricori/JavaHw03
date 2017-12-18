@@ -33,19 +33,20 @@
 				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 0}">
 					<b>(司机已经到达约定地点，请尽快确认出发)</b>
 				</c:if>
-				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 1}">
-					<b>(行程中...)</b>
+				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 1
+					&& tripingOrder.getDendstate() == 0}"><b>(行程中...)</b>
 				</c:if>
 				<c:if test="${tripingOrder.getDendstate() == 1}"><b>(司机已经到达目的地，请尽快确认到达)</b></c:if>
 				</div>
 				<div class="am-panel-bd">
 				<ul>
 				<li>
-				<c:if test="${tripingOrder.getPstartstate() == 0}">订单状态：等待司机到达</c:if>
-				<c:if test="${tripingOrder.getPstartstate() == 1 && tripingOrder.getPstartstate() == 0}">
+				<c:if test="${tripingOrder.getDstartstate() == 0}">订单状态：等待司机到达</c:if>
+				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 0}">
 					订单状态：司机已经到约定地点
 				</c:if>
-				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 1}">
+				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 1
+					&& tripingOrder.getDendstate() == 0}">
 					<b>订单状态：行程中</b>
 				</c:if>
 				<c:if test="${tripingOrder.getDendstate() == 1}"><b>订单状态：司机已经到达目的地，请尽快确认到达</b></c:if>
@@ -97,14 +98,23 @@
 		<h2 class="am-titlebar-title">已结束的行程</h2>
 	</div>
 	<div class="endtriplists">
-		<div class="am-panel am-panel-secondary">
-			<div class="am-panel-hd">面板标题</div>
-			<div class="am-panel-bd">面板内容</div>
-		</div>
-		<div class="am-panel am-panel-secondary">
-			<div class="am-panel-hd">面板标题</div>
-			<div class="am-panel-bd">面板内容</div>
-		</div>		
+		<c:forEach items="${endTripOrders}" var="endTripOrder">
+			<div class="am-panel am-panel-secondary">
+				<div class="am-panel-hd">订单编号:${endTripOrder.getId()} </div>
+				<div class="am-panel-bd">
+				<ul>
+				<li>状态：已完成</li>
+			    <li>接单司机id：${endTripOrder.getDriver()}</li>
+			    <li>接单司机手机号：${endTripOrder.getDriverphone()}</li>
+			    <li>出发地点：${endTripOrder.getStartplace()}</li>
+			    <li>目的地点：${endTripOrder.getEndplace()}</li>
+			    <li>行程人数：${endTripOrder.getPeoplenum()}</li>
+			    <li>价格：${endTripOrder.getPrice()}</li>
+			    <li>支付订单号：${endTripOrder.getPayid()}</li>
+			  	</ul>
+				</div>
+			</div>	
+		</c:forEach>		
 	</div>
 	</c:if>
 	
