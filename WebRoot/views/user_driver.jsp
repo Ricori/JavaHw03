@@ -20,8 +20,21 @@
 			<a href="./user_driver_me"><i class="am-header-icon am-icon-user"></i></a>
 		</div>
 	</header>
+	
 
-
+		<div style="margin:10px;">		
+		<div class="am-alert am-alert-success" data-am-alert>
+	  		<button type="button" class="am-close">&times;</button>
+			<ul>
+			<li>乘客id：${publishTrip.getPassenger()}</li>
+		    <li>出发地点：${publishTrip.getStartplace()}</li>
+		    <li>目的地点：${publishTrip.getEndplace()}</li>
+		    <li>出发时间：${publishTrip.getStarttime()}</li>
+		    <li>行程人数：${publishTrip.getPeoplenum()}</li>
+		    <li>期望价格：${publishTrip.getPrice()}</li>
+		  	</ul>
+		</div>
+	</div>
 
 
   <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
