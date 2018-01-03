@@ -36,4 +36,15 @@ public class DriverController {
 		return "user_driver_me";
 	}
 	
+	@RequestMapping(value= "/user_driver_confirmstart")
+	public String userDriverConfirmstart(HttpServletRequest request,Model model){
+		
+		return null;
+	}
+	
+	@RequestMapping(value= "/user_driver_confirmend")
+	public String userDriverConfirmend(HttpServletRequest request,Model model){
+		
+		return null;
+	}
 }

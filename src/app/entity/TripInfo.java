@@ -112,7 +112,6 @@ public class TripInfo {
 		this.price = price;
 	}
 	
-
 }
 
 
