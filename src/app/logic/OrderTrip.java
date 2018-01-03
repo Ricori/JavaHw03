@@ -16,6 +16,7 @@ public class OrderTrip {
 	public ArrayList<TripOrderInfo> searchTripingOrder(Integer userid) {
 		ArrayList<TripOrderInfo> allOrders = new ArrayList<TripOrderInfo>();
 		String sqlTxt = "select * from trip_order_info where passenger=" + userid;
+		sqlTxt += " and pendstate=0";
 		System.out.println("sql-->" + sqlTxt);
 		List<Object> result = dao.queryAll(sqlTxt);
 		for(int i = 0;i < result.size();i++){
@@ -26,14 +27,12 @@ public class OrderTrip {
 	
 	
 	/**查询乘客用户已经完成的行程
-	 * PS:付款完成才算完成，所以查询trip_order_info数据表的dendstate字段
-	 * PS2:因为已完成行程可能较多，所以需要分页查询
 	 * @param userid 用户ID
 	 * @param fy 第几页
 	 */
 	public ArrayList<TripOrderInfo> serachEndTripOrder(Integer userid,Integer fy){
 		String sqlTxt = "select * from trip_order_info where passenger=" + userid;
-		sqlTxt += " and dendstate=1";
+		sqlTxt += " and pendstate=1";
 		sqlTxt += " limit " + (fy-1)*pageSize +","+ pageSize;
 		
 		ArrayList<TripOrderInfo> allOrders = new ArrayList<TripOrderInfo>();
