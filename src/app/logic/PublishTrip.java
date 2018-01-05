@@ -18,7 +18,7 @@ public class PublishTrip {
 		ArrayList<TripInfo> allTripInfos = new ArrayList<TripInfo>();
 		String sqlTxt = "select * from trip_publish_info where passenger=" + userid;
 		sqlTxt += " and `order`=0";  //没有司机接单
-		System.out.println("sql-->" + sqlTxt);
+		//System.out.println("sql-->" + sqlTxt);
 		List<Object> result = dao.queryAll(sqlTxt);
 		for(int i = 0;i < result.size();i++){
 			allTripInfos.add((TripInfo)result.get(i));
@@ -43,7 +43,7 @@ public class PublishTrip {
 	}
 	
 	
-	/**通过publishid取Tripinfo对象
+	/**通过publishid获取Tripinfo对象
 	 * @param publishid 待接单行程id
 	 */
 	public TripInfo getTripInfo(int publishid){
@@ -91,13 +91,10 @@ public class PublishTrip {
 	 */
 	public boolean setPulishDriverid(int publishid,int driverid){
 		String sqlTxt= "update trip_publish_info set `order`=1,driver=" + driverid
-				+ "where id=" + publishid;
-		if(dao.update(sqlTxt)){
+				+ " where id=" + publishid;
+		if(dao.update(sqlTxt))
 			return true;
-		}else{
-			return false;
-		}
+		return false;
 	}
-	
 	
 }

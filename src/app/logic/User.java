@@ -15,7 +15,7 @@ public class User {
 		String sqlTxt = "select count(*) from user_info "
 				+ "where phone='" + phone + "' and pwd='"
 				+ pwd + "'";
-		System.out.println("sql-->" + sqlTxt);
+		//System.out.println("sql-->" + sqlTxt);
 		int ts = new Long((Long)dao.find(sqlTxt,"count(*)")).intValue();
 		if(ts > 0){
 			return true;

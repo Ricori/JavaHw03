@@ -18,7 +18,7 @@ public class OrderTrip {
 		ArrayList<TripOrderInfo> allOrders = new ArrayList<TripOrderInfo>();
 		String sqlTxt = "select * from trip_order_info where passenger=" + userid;
 		sqlTxt += " and pendstate=0";
-		System.out.println("sql-->" + sqlTxt);
+		//System.out.println("sql-->" + sqlTxt);
 		List<Object> result = dao.queryAll(sqlTxt);
 		for(int i = 0;i < result.size();i++){
 			allOrders.add((TripOrderInfo)result.get(i));
@@ -37,7 +37,7 @@ public class OrderTrip {
 		sqlTxt += " limit " + (fy-1)*pageSize +","+ pageSize;
 		
 		ArrayList<TripOrderInfo> allOrders = new ArrayList<TripOrderInfo>();
-		System.out.println("sql-->" + sqlTxt);
+		//System.out.println("sql-->" + sqlTxt);
 		List<Object> result = dao.queryAll(sqlTxt);
 		for(int i = 0;i < result.size();i++){
 			allOrders.add((TripOrderInfo)result.get(i));
@@ -71,10 +71,24 @@ public class OrderTrip {
 				+ tripInfo.getPrice() + ","
 				+ "0,0,0,0,0)";
 		
+		System.out.println("sql-->" + sqlTxt);
 		if(dao.update(sqlTxt))
 			return true;
 		return false;
 		
+	}
+	
+	/**乘客确认上车
+	 * @param tripId 行程id
+	 * @param passengerId 乘客id
+	 */
+	public boolean passengerConfirmstart(int tripId,int passengerId){
+		String sqlTxt= "update trip_order_info set pstartstate=1 where id=" + tripId
+				+ " and passenger=" + passengerId;
+		//System.out.println("sql-->" + sqlTxt);
+		if(dao.update(sqlTxt))
+			return true;
+		return false;
 	}
 	
 }

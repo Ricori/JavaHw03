@@ -47,6 +47,7 @@ public class DriverController {
 		String idParameterString = request.getParameter("publishid");
 		if(idParameterString == null || idParameterString.equals("")){
 			response.sendRedirect(request.getContextPath() + "/user_driver");
+			return;
 		}
 		HttpSession session = request.getSession();
 		
@@ -55,9 +56,7 @@ public class DriverController {
 		PublishTrip p = new PublishTrip();
 		int driverid = (Integer)session.getAttribute("userid");
 		p.setPulishDriverid(publishid, driverid);
-		
 		TripInfo tripInfo = p.getTripInfo(publishid);
-		
 		OrderTrip o = new OrderTrip();
 		o.confirmPulishTrip(tripInfo);
 		

@@ -1,11 +1,13 @@
 package app.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -101,5 +103,26 @@ public class PassengerController {
 		}
 
 	}
+	
+	@RequestMapping(value= "/user_passenger_confirmstart")
+	public void userPassengerConfirmstart(HttpServletRequest request,HttpServletResponse response) 
+			throws IOException {
+		
+		String idParameterString = request.getParameter("id");
+		if(idParameterString == null || idParameterString.equals("")){
+			response.sendRedirect(request.getContextPath() + "/user_passenger_tripinfo");
+			return;
+		}
+		int tripid = Integer.parseInt(idParameterString);
+		
+		Integer userid = (Integer) request.getSession().getAttribute("userid");
+		
+		OrderTrip o = new OrderTrip();
+		o.passengerConfirmstart(tripid, userid);
+		
+		response.sendRedirect(request.getContextPath() + "/user_passenger_tripinfo");
+	}
+	
+	
 
 }
