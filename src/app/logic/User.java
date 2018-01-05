@@ -49,4 +49,12 @@ public class User {
 		return Integer.parseInt(user.getPhone());
 	}
 	
+	/**返回用户对象
+	 * @param userId 用户id
+	 */
+	public UserInfo getUser(int userId) {
+		String sqlTxt = "select * from user_info where id=" + userId;
+		return (UserInfo)dao.findById(sqlTxt);
+	}
+	
 }

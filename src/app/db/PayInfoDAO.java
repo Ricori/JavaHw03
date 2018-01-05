@@ -10,6 +10,8 @@ public class PayInfoDAO extends DBHelperDAO{
 		return new PayInfo(
 				rs.getInt("id"),
 				rs.getInt("orderid"),
+				rs.getInt("passenger"),
+				rs.getInt("driver"),
 				rs.getDouble("price"),
 				rs.getTimestamp("time"),
 				rs.getInt("state")

@@ -85,10 +85,30 @@ public class OrderTrip {
 	public boolean passengerConfirmstart(int tripId,int passengerId){
 		String sqlTxt= "update trip_order_info set pstartstate=1 where id=" + tripId
 				+ " and passenger=" + passengerId;
-		//System.out.println("sql-->" + sqlTxt);
 		if(dao.update(sqlTxt))
 			return true;
 		return false;
+	}
+	
+	/**乘客确认到达目的地
+	 * @param tripId 行程id
+	 * @param passengerId 乘客id
+	 * @param payid 账单id
+	 */
+	public boolean passengerConfirmend(int tripId,int passengerId,int payid){
+		String sqlTxt= "update trip_order_info set pendstate=1,payid="+ payid 
+				+ " where id=" + tripId + " and passenger=" + passengerId;
+		if(dao.update(sqlTxt))
+			return true;
+		return false;
+	}
+	
+	/**返回订单对象
+	 * @param tripId 行程id
+	 */
+	public TripOrderInfo getTripOrder(int tripId) {
+		String sqlTxt = "select * from trip_order_info where id=" + tripId;
+		return (TripOrderInfo)dao.findById(sqlTxt);
 	}
 	
 }
