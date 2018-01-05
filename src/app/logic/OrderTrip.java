@@ -3,6 +3,7 @@ package app.logic;
 import java.util.ArrayList;
 import java.util.List;
 import app.db.TripOrderInfoDAO;
+import app.entity.TripInfo;
 import app.entity.TripOrderInfo;
 
 public class OrderTrip {
@@ -45,5 +46,35 @@ public class OrderTrip {
 	}
 	
 	
+	/**司机接单
+	 * @param tripInfo 待接单行程对象
+	 */
+	public boolean confirmPulishTrip(TripInfo tripInfo){
+	
+		int passenger = tripInfo.getPassenger();
+		int driver = tripInfo.getDriver();
+		User u = new User();
+		int passengerphone = u.getPhonenumber(passenger);
+		int driverphone = u.getPhonenumber(driver);
+		
+		String sqlTxt = "insert into trip_order_info"
+				+ "(passenger,driver,passengerphone,driverphone,startplace,endplace,peoplenum,price,"
+				+ "pstartstate,dstartstate,pendstate,dendstate,payid)"
+				+ "values("
+				+ passenger + ","
+				+ driver + ","
+				+ passengerphone + ","
+				+ driverphone + ","
+				+ "'" + tripInfo.getStartplace() + "',"
+				+ "'" + tripInfo.getEndplace() + "',"
+				+ tripInfo.getPeoplenum() + ","
+				+ tripInfo.getPrice() + ","
+				+ "0,0,0,0,0)";
+		
+		if(dao.update(sqlTxt))
+			return true;
+		return false;
+		
+	}
 	
 }

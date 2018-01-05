@@ -43,6 +43,16 @@ public class PublishTrip {
 	}
 	
 	
+	/**通过publishid取Tripinfo对象
+	 * @param publishid 待接单行程id
+	 */
+	public TripInfo getTripInfo(int publishid){
+		String sqlTxt = "select * from trip_publish_info where id=" + publishid;
+		TripInfo tripInfo = (TripInfo)dao.findById(sqlTxt);
+		return tripInfo;
+	}
+	
+	
 	/**添加行程
 	 * @param tripInfo 行程对象
 	 */
@@ -74,5 +84,20 @@ public class PublishTrip {
 		return false;
 		
 	}
+	
+	/**数据库设置接单司机id
+	 * @param publishid 待接单行程id
+	 * @param driverid 司机id
+	 */
+	public boolean setPulishDriverid(int publishid,int driverid){
+		String sqlTxt= "update trip_publish_info set `order`=1,driver=" + driverid
+				+ "where id=" + publishid;
+		if(dao.update(sqlTxt)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	
 }

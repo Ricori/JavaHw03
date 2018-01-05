@@ -40,7 +40,13 @@ public class User {
 		return new UserInfo();
 	}
 	
-	
-	
+	/**返回用户手机号码
+	 * @param userid 用户id
+	 */
+	public int getPhonenumber(int userid) {
+		String sqlTxt = "select * from user_info where id=" + userid;
+		UserInfo user = (UserInfo)dao.findById(sqlTxt);
+		return Integer.parseInt(user.getPhone());
+	}
 	
 }
