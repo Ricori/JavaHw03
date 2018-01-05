@@ -1,0 +1,43 @@
+.banner .bg{
+	background-image: url(../images/me-bj.jpg);
+    width: 100%;
+    min-height: 220px;
+    overflow: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.banner .avatar {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    width: 98px;
+    height: 98px;
+    margin: -49px 0 0 -49px;
+    border-radius: 50%;
+    border: solid 4px #ffffff;
+    overflow: hidden;
+}
+
+.banner .phone {
+    position: absolute;
+    top: 194px;
+    left: 50%;
+    font-size: 27px;
+    color: white;
+    font-weight: 600;
+    margin: 0 0 0 -78px;
+}
+
+.main{
+	margin:8px;
+}
+
+.signature{
+	width: 100%;
+    margin-bottom:10px;
+}

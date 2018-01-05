@@ -47,9 +47,9 @@
 				</c:if>
 				<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 1
 					&& tripingOrder.getDendstate() == 0}">
-					<b>订单状态：行程中</b>
+					订单状态：行程中
 				</c:if>
-				<c:if test="${tripingOrder.getDendstate() == 1}"><b>订单状态：司机已经到达目的地，请尽快确认到达</b></c:if>
+				<c:if test="${tripingOrder.getDendstate() == 1}">订单状态：司机已确认到达目的地</c:if>
 				</li>
 			    <li>接单司机id：${tripingOrder.getDriver()}</li>
 			    <li>接单司机手机号：${tripingOrder.getDriverphone()}</li>
@@ -58,9 +58,18 @@
 			    <li>行程人数：${tripingOrder.getPeoplenum()}</li>
 			    <li>期望价格：${tripingOrder.getPrice()}</li>
 			  	</ul>
+			  	
+			  	<c:if test="${tripingOrder.getDstartstate() == 1 && tripingOrder.getPstartstate() == 0}">
+					<a href="user_passenger_confirmstart?id=${tripingOrder.getId()}" 
+						class="am-btn am-btn-warning am-btn-sm">我已上车，确认出发</a>
+				</c:if>
+				<c:if test="${tripingOrder.getDendstate() == 1}">
+					<a href="user_passenger_confirmend?id=${tripingOrder.getId()}" 
+						class="am-btn am-btn-warning am-btn-sm">确认到达目的地，支付${tripingOrder.getPrice()}元</a>
+				</c:if>
 				</div>
-			</div>	
-		</c:forEach>	
+			</div>
+		</c:forEach>
 	</div>
 	</c:if>
 	

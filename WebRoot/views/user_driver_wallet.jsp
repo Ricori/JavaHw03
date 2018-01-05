@@ -21,8 +21,31 @@
 		</div>
 	</header>
 
-
-WALLET
+	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+		<h2 class="am-titlebar-title">账单明细</h2>
+	</div>
+	<div style="margin:8px">
+	<table class="am-table am-table-bordered am-table-radius am-table-striped">
+     <thead>
+        <tr>
+            <th>付款编号</th>
+            <th>订单编号</th>
+            <th>金额变动</th>
+            <th>付款时间</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<c:forEach items="${payInfos}" var="payInfo">
+        <tr>
+        	<td class="am-primary">${payInfo.getId()}</td>
+            <td>${payInfo.getOrderid()}</td>
+            <td class="am-danger">+${payInfo.getPrice()}元</td>
+            <td>${payInfo.getTime()}</td>
+        </tr>
+        </c:forEach>
+    </tbody>
+	</table>
+	</div>
 
   <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
       <ul class="am-navbar-nav am-cf am-avg-sm-4">

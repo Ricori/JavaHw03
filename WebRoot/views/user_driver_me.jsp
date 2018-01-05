@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <title>打车-司机端</title>
   <link rel="stylesheet" href="./assets/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="./assets/css/driver.css"/>
+  <link rel="stylesheet" href="./assets/css/me.css"/>
 </head>
 
 <body>
@@ -21,8 +21,19 @@
 		</div>
 	</header>
 
+	<div class="banner">
+		<div class="bg"></div>
+		<img src="assets/images/me-aw.jpg" class="avatar">
+		<div class="phone">${user.getPhone()}</div>
+	</div>
 
-ME
+	<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+		<h2 class="am-titlebar-title">个性签名</h2>
+	</div>
+	<div class="main">
+		<textarea class="signature" rows="4" id="doc-ta-1">${user.getSignature()}</textarea>
+		<a href="#" class="am-btn am-btn-default am-btn-sm">更新</a>
+	</div>
 
   <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
       <ul class="am-navbar-nav am-cf am-avg-sm-4">
