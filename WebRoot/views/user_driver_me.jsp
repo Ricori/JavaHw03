@@ -35,6 +35,8 @@
 		<a href="#" class="am-btn am-btn-default am-btn-sm">更新</a>
 	</div>
 
+	<a href="user_loginout" class="am-btn am-btn-danger" style="margin-left:8px">退出账号</a>
+	
   <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
       <ul class="am-navbar-nav am-cf am-avg-sm-4">
           <li><a href="user_driver" class="">

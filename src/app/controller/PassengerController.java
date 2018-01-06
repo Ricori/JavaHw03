@@ -34,7 +34,7 @@ public class PassengerController {
 		Integer userid = (Integer) seesion.getAttribute("userid");
 		//进行中行程
 		OrderTrip o = new OrderTrip();
-		ArrayList<TripOrderInfo> tripingOrders = o.searchTripingOrder(userid);
+		ArrayList<TripOrderInfo> tripingOrders = o.searchTripingOrder(userid,0);
 		model.addAttribute("tripingOrders",tripingOrders);
 		
 		//发布中行程
@@ -43,7 +43,7 @@ public class PassengerController {
 		model.addAttribute("allPublishTrips",allPublishTrips);
 		
 		//已完成行程
-		ArrayList<TripOrderInfo> endTripOrders = o.serachEndTripOrder(userid,1);
+		ArrayList<TripOrderInfo> endTripOrders = o.serachEndTripOrder(userid,0,1);
 		model.addAttribute("endTripOrders",endTripOrders);
 		
 		return "user_passenger_trip";

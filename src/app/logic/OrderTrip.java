@@ -11,13 +11,16 @@ public class OrderTrip {
 	public TripOrderInfoDAO dao = new TripOrderInfoDAO();
 	public final int pageSize = 5; //一页最多显示的已完成的行程数目
 	
-	/**查询乘客用户进行中的行程
+	/**查询用户进行中的行程
 	 * @param id 用户id
+	 * @param type 乘客还是司机
 	 */
-	public ArrayList<TripOrderInfo> searchTripingOrder(Integer userid) {
+	public ArrayList<TripOrderInfo> searchTripingOrder(Integer userid,Integer type) {
 		ArrayList<TripOrderInfo> allOrders = new ArrayList<TripOrderInfo>();
-		String sqlTxt = "select * from trip_order_info where passenger=" + userid;
-		sqlTxt += " and pendstate=0";
+		String sqlTxt = "select * from trip_order_info where "
+				+ (type == 0 ? "passenger=" : "driver=")
+				+ userid;
+		sqlTxt += " and "+ (type == 0 ? "p" : "d") +"endstate=0";
 		//System.out.println("sql-->" + sqlTxt);
 		List<Object> result = dao.queryAll(sqlTxt);
 		for(int i = 0;i < result.size();i++){
@@ -27,13 +30,16 @@ public class OrderTrip {
 	}
 	
 
-	/**查询乘客用户已经完成的行程
+	/**查询用户已经完成的行程
 	 * @param userid 用户ID
+	 * @param type 乘客还是司机
 	 * @param fy 第几页
 	 */
-	public ArrayList<TripOrderInfo> serachEndTripOrder(Integer userid,Integer fy){
-		String sqlTxt = "select * from trip_order_info where passenger=" + userid;
-		sqlTxt += " and pendstate=1";
+	public ArrayList<TripOrderInfo> serachEndTripOrder(Integer userid,Integer type,Integer fy){
+		String sqlTxt = "select * from trip_order_info where "
+				+ (type == 0 ? "passenger=" : "driver=")
+				+ userid;
+		sqlTxt += " and "+ (type == 0 ? "p" : "d") +"endstate=1";
 		sqlTxt += " limit " + (fy-1)*pageSize +","+ pageSize;
 		
 		ArrayList<TripOrderInfo> allOrders = new ArrayList<TripOrderInfo>();
@@ -54,8 +60,8 @@ public class OrderTrip {
 		int passenger = tripInfo.getPassenger();
 		int driver = tripInfo.getDriver();
 		User u = new User();
-		int passengerphone = u.getPhonenumber(passenger);
-		int driverphone = u.getPhonenumber(driver);
+		String passengerphone = u.getPhonenumber(passenger);
+		String driverphone = u.getPhonenumber(driver);
 		
 		String sqlTxt = "insert into trip_order_info"
 				+ "(passenger,driver,passengerphone,driverphone,startplace,endplace,peoplenum,price,"

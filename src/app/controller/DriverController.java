@@ -25,21 +25,21 @@ public class DriverController {
 
 	@RequestMapping(value = "/user_driver")
 	public String userDriver(HttpServletRequest request,Model model){
-		
-		//未接单行程
-		PublishTrip p = new PublishTrip();
-		ArrayList<TripInfo> allTripOrders = p.serachNyacTripOrder(1);
-		model.addAttribute("allTripOrders",allTripOrders);
-		
 		HttpSession seesion = request.getSession();
 		Integer userid = (Integer) seesion.getAttribute("userid");
+		
+		//可接单行程
+		PublishTrip p = new PublishTrip();
+		ArrayList<TripInfo> nyacTripOrders = p.serachNyacTripOrder(1);
+		model.addAttribute("nyacTripOrders",nyacTripOrders);
+		
 		//进行中行程
 		OrderTrip o = new OrderTrip();
-		ArrayList<TripOrderInfo> tripingOrders = o.searchTripingOrder(userid);
+		ArrayList<TripOrderInfo> tripingOrders = o.searchTripingOrder(userid,1);
 		model.addAttribute("tripingOrders",tripingOrders);
 		
 		//已完成行程
-		ArrayList<TripOrderInfo> endTripOrders = o.serachEndTripOrder(userid,1);
+		ArrayList<TripOrderInfo> endTripOrders = o.serachEndTripOrder(userid,1,1);
 		model.addAttribute("endTripOrders",endTripOrders);
 		
 		return "user_driver";
@@ -68,7 +68,7 @@ public class DriverController {
 	public void userDriverConfirmstart(HttpServletRequest request,HttpServletResponse response) 
 			throws IOException{
 		
-		String idParameterString = request.getParameter("publishid");
+		String idParameterString = request.getParameter("id");
 		if(idParameterString == null || idParameterString.equals("")){
 			response.sendRedirect(request.getContextPath() + "/user_driver");
 			return;
@@ -78,7 +78,7 @@ public class DriverController {
 		int publishid = Integer.parseInt(idParameterString);
 		
 		PublishTrip p = new PublishTrip();
-		int driverid = (Integer)session.getAttribute("id");
+		int driverid = (Integer)session.getAttribute("userid");
 		p.setPulishDriverid(publishid, driverid);
 		TripInfo tripInfo = p.getTripInfo(publishid);
 		OrderTrip o = new OrderTrip();
@@ -97,11 +97,8 @@ public class DriverController {
 			return;
 		}
 		int tripid = Integer.parseInt(idParameterString);
-		
-		Integer driverid = (Integer) request.getSession().getAttribute("driverid");
-		
+		Integer driverid = (Integer) request.getSession().getAttribute("userid");
 		OrderTrip o = new OrderTrip();
-		
 		o.driverConfirmstart(tripid, driverid);
 		
 		response.sendRedirect(request.getContextPath() + "/user_driver");
@@ -117,11 +114,8 @@ public class DriverController {
 			return;
 		}
 		int tripid = Integer.parseInt(idParameterString);
-		
-		Integer driverid = (Integer) request.getSession().getAttribute("driverid");
-		
+		Integer driverid = (Integer) request.getSession().getAttribute("userid");
 		OrderTrip o = new OrderTrip();
-		
 		o.driverConfirmend(tripid, driverid);
 		
 		response.sendRedirect(request.getContextPath() + "/user_driver");

@@ -43,10 +43,10 @@ public class User {
 	/**返回用户手机号码
 	 * @param userid 用户id
 	 */
-	public int getPhonenumber(int userid) {
+	public String getPhonenumber(int userid) {
 		String sqlTxt = "select * from user_info where id=" + userid;
 		UserInfo user = (UserInfo)dao.findById(sqlTxt);
-		return Integer.parseInt(user.getPhone());
+		return user.getPhone();
 	}
 	
 	/**返回用户对象
