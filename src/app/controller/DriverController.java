@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.entity.PayInfo;
 import app.entity.TripInfo;
+import app.entity.TripOrderInfo;
 import app.entity.UserInfo;
 import app.logic.OrderTrip;
 import app.logic.Pay;
@@ -25,9 +26,21 @@ public class DriverController {
 	@RequestMapping(value = "/user_driver")
 	public String userDriver(HttpServletRequest request,Model model){
 		
+		//未接单行程
 		PublishTrip p = new PublishTrip();
 		ArrayList<TripInfo> allTripOrders = p.serachNyacTripOrder(1);
 		model.addAttribute("allTripOrders",allTripOrders);
+		
+		HttpSession seesion = request.getSession();
+		Integer userid = (Integer) seesion.getAttribute("userid");
+		//进行中行程
+		OrderTrip o = new OrderTrip();
+		ArrayList<TripOrderInfo> tripingOrders = o.searchTripingOrder(userid);
+		model.addAttribute("tripingOrders",tripingOrders);
+		
+		//已完成行程
+		ArrayList<TripOrderInfo> endTripOrders = o.serachEndTripOrder(userid,1);
+		model.addAttribute("endTripOrders",endTripOrders);
 		
 		return "user_driver";
 	}
@@ -50,7 +63,8 @@ public class DriverController {
 		return "user_driver_me";
 	}
 	
-	@RequestMapping(value= "/user_driver_confirmstart")
+	//司机确认接单
+	@RequestMapping(value= "/user_driver_confirmpulishTrip")
 	public void userDriverConfirmstart(HttpServletRequest request,HttpServletResponse response) 
 			throws IOException{
 		
@@ -64,7 +78,7 @@ public class DriverController {
 		int publishid = Integer.parseInt(idParameterString);
 		
 		PublishTrip p = new PublishTrip();
-		int driverid = (Integer)session.getAttribute("userid");
+		int driverid = (Integer)session.getAttribute("id");
 		p.setPulishDriverid(publishid, driverid);
 		TripInfo tripInfo = p.getTripInfo(publishid);
 		OrderTrip o = new OrderTrip();
@@ -73,9 +87,43 @@ public class DriverController {
 		response.sendRedirect(request.getContextPath() + "/user_driver");
 	}
 	
-	@RequestMapping(value= "/user_driver_confirmend")
-	public void userDriverConfirmend(HttpServletRequest request,Model model){
+	//司机确认到达约定地点
+	@RequestMapping(value= "/user_driver_confirmstart")
+	public void userPassengerConfirmstart(HttpServletRequest request,HttpServletResponse response) 
+			throws IOException {
+		String idParameterString = request.getParameter("id");
+		if(idParameterString == null || idParameterString.equals("")){
+			response.sendRedirect(request.getContextPath() + "/user_driver");
+			return;
+		}
+		int tripid = Integer.parseInt(idParameterString);
 		
-		return;
+		Integer driverid = (Integer) request.getSession().getAttribute("driverid");
+		
+		OrderTrip o = new OrderTrip();
+		
+		o.driverConfirmstart(tripid, driverid);
+		
+		response.sendRedirect(request.getContextPath() + "/user_driver");
+	}
+	
+	//司机确认到达目的地
+	@RequestMapping(value= "/user_driver_confirmend")
+	public void userPassengerConfirmend(HttpServletRequest request,HttpServletResponse response) 
+			throws IOException {
+		String idParameterString = request.getParameter("id");
+		if(idParameterString == null || idParameterString.equals("")){
+			response.sendRedirect(request.getContextPath() + "/user_driver");
+			return;
+		}
+		int tripid = Integer.parseInt(idParameterString);
+		
+		Integer driverid = (Integer) request.getSession().getAttribute("driverid");
+		
+		OrderTrip o = new OrderTrip();
+		
+		o.driverConfirmend(tripid, driverid);
+		
+		response.sendRedirect(request.getContextPath() + "/user_driver");
 	}
 }

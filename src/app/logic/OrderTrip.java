@@ -26,7 +26,7 @@ public class OrderTrip {
 		return allOrders;
 	}
 	
-	
+
 	/**查询乘客用户已经完成的行程
 	 * @param userid 用户ID
 	 * @param fy 第几页
@@ -76,6 +76,30 @@ public class OrderTrip {
 			return true;
 		return false;
 		
+	}
+	
+	/**司机确认到达约定地点
+	 *  @param tripId 行程id
+	 *   @param driverId 司机id
+	 */
+	public boolean driverConfirmstart(int tripId,int driverId){
+		String sqlTxt= "update trip_order_info set dstartstate=1 where id=" + tripId
+				+ " and driver=" + driverId;
+		if(dao.update(sqlTxt))
+			return true;
+		return false;
+	}
+	
+	/**司机确认到达目的地
+	 * @param tripId 行程id
+	 * @param driverId 司机id
+	 */
+	public boolean driverConfirmend(int tripId,int driverId){
+		String sqlTxt= "update trip_order_info set dendstate=1 where id=" + tripId
+				+ " and driver=" + driverId;
+		if(dao.update(sqlTxt))
+			return true;
+		return false;
 	}
 	
 	/**乘客确认上车
